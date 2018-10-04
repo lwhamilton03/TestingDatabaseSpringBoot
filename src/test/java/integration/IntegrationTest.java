@@ -58,16 +58,16 @@ public class IntegrationTest {
 		}
 
 	// Testing the Post Request
-	@Test 
-	public void addAPersonToDatabaseTest() throws Exception
-	{
-		mvc.perform(MockMvcRequestBuilders
-				.post("/api/person").contentType(MediaType.APPLICATION_JSON)
-				.content("{\"name\" : \"Vinu\", \"address\" : \"Antartic\", \"age\" : 12}"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.name", is("Vinu")));
-	}
+//	@Test 
+//	public void addAPersonToDatabaseTest() throws Exception
+//	{
+//		mvc.perform(MockMvcRequestBuilders
+//				.post("/api/person").contentType(MediaType.APPLICATION_JSON)
+//				.content("{\"name\" : \"Vinu\", \"address\" : \"Antartica\", \"age\" : 12}"))
+//				.andExpect(status().isOk())
+//				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+//				.andExpect(jsonPath("$.name", is("Vinu")));
+//	}
 	
 	//Testing the Delete Request
 	@Test 
@@ -98,9 +98,9 @@ public class IntegrationTest {
 		
 		mvc.perform(MockMvcRequestBuilders
 				.put("/api/person/" + idNum).contentType(MediaType.APPLICATION_JSON)
-				.content("{\"name\" : \"Vinu\", \"address\" : \"Antartica\", \"age\" : 201}"))
+				.content("{\"name\" : \"Vinu\", \"address\" : \"Narnia\", \"age\" : 201}"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.address", is("Antartica")));
+				.andExpect(jsonPath("$.address", is("Narnia")));
 	}
 }

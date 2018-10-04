@@ -28,26 +28,30 @@ public class MySpringBootDataAppController {
 	
 	//Method to CREATE a person
 	@PostMapping("/person")
-	public MySpringBootDataModel createPerson(@Valid @RequestBody MySpringBootDataModel mSDM) {
+	public MySpringBootDataModel createPerson(@Valid @RequestBody MySpringBootDataModel mSDM) 
+	{
 		return myRepository.save(mSDM);
 	}
 	
 	//Method to GET a person
 	@GetMapping("person/{id}")
-	public MySpringBootDataModel getPersonbyID(@PathVariable(value = "id")Long personID) {
+	public MySpringBootDataModel getPersonbyID(@PathVariable(value = "id")Long personID)
+	{
 		return myRepository.findById(personID).orElseThrow(()-> new ResourceNotFoundException("MySpringBootDataModel","id",personID));
 	}
 	
 	//Method to get ALL people
 	@GetMapping("/person")
-	public List<MySpringBootDataModel> getAllPeople() {
+	public List<MySpringBootDataModel> getAllPeople()
+	{
 		return myRepository.findAll();
 	}
 	
 	//Method to UPDATE a person
 	@PutMapping("/person/{id}")
 	public MySpringBootDataModel updatePerson(@PathVariable(value = "id") Long personID,
-		@Valid @RequestBody MySpringBootDataModel personDetails) {
+		@Valid @RequestBody MySpringBootDataModel personDetails)
+	{
 			
 		MySpringBootDataModel mSDM = myRepository.findById(personID).orElseThrow(()-> new ResourceNotFoundException("Person","id",personID));
 	
@@ -67,4 +71,6 @@ public class MySpringBootDataAppController {
 		myRepository.delete(mSDM);
 		return ResponseEntity.ok().build();
 	}
+	
+	
 }
