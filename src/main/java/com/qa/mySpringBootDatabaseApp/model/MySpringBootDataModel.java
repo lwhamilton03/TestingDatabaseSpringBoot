@@ -53,7 +53,6 @@ public class MySpringBootDataModel implements Serializable{
 	}
 
 	
-
 	public Long getId() {
 		return id;
 	}

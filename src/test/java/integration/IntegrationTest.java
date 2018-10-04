@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,7 +28,11 @@ import repo.RepositoryTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {MySpringBootDatabaseAppApplication.class})
+//@ContextConfiguration
+//@TestPropertySource(locations = "classpath:my-test.properties")
+//@TestPropertySource("*/my-test.properties")
 @AutoConfigureMockMvc
+
 public class IntegrationTest {
 
 	@Autowired
@@ -67,9 +73,12 @@ public class IntegrationTest {
 	@Test 
 	public void deletePersonFromDatabaseTest() throws Exception
 	{
-		repository.save(new MySpringBootDataModel("Mitch", "Narnia", 201));
-		mvc.perform(MockMvcRequestBuilders.delete("/api/person/1").contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNotFound());
+		MySpringBootDataModel model1 = new MySpringBootDataModel("Vinu", "Narnia", 201);
+		repository.save(model1);
+		Long idNum = model1.getId();
+		
+		mvc.perform(MockMvcRequestBuilders.delete("/api/person/" + idNum).contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().is2xxSuccessful());
 	}
 	
 	//Testing the Put Request 
