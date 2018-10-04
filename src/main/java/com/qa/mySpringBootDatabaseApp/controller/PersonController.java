@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.mySpringBootDatabaseApp.exception.ResourceNotFoundException;
@@ -19,7 +20,9 @@ import com.qa.mySpringBootDatabaseApp.repository.MySpringBootRepository;
 import com.qa.mySpringBootDatabaseApp.repository.OrderRepository;
 
 @RestController
-public class PersonController {
+@RequestMapping("/api")
+public class PersonController 
+{
 	
 	@Autowired
 	private OrderRepository orderRepository;
