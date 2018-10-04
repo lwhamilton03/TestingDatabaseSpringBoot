@@ -35,6 +35,7 @@ public class RepositoryTest {
 		MySpringBootDataModel model1 = new MySpringBootDataModel("Cooper", "Glasgow", 46);
 		entityManager.persist(model1);
 		entityManager.flush();
+		System.out.println(model1.getId());
 		assertTrue(myRepo.findById(model1.getId()).isPresent());
 	}
 	
