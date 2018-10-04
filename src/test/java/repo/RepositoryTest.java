@@ -1,5 +1,6 @@
 package repo;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -37,4 +38,35 @@ public class RepositoryTest {
 		assertTrue(myRepo.findById(model1.getId()).isPresent());
 	}
 	
+	@Test
+	public void retrieveByNameTest()
+	{
+		MySpringBootDataModel model1 = new MySpringBootDataModel("Cooper", "Glasgow", 46);
+		entityManager.persist(model1);
+		MySpringBootDataModel model2 = new MySpringBootDataModel("Kyle", "Bath", 46);
+		entityManager.persist(model2);
+		entityManager.flush();
+		assertEquals("It's not Cooper", "Cooper", myRepo.findByName("Cooper").getName());
+	}
+	
+	@Test
+	public void retrieveByAddressTest()
+	{
+		MySpringBootDataModel model1 = new MySpringBootDataModel("Cooper", "Glasgow", 46);
+		entityManager.persist(model1);
+		MySpringBootDataModel model2 = new MySpringBootDataModel("Kyle", "Bath", 46);
+		entityManager.persist(model2);
+		entityManager.flush();
+		assertEquals("There is no Bristol", "Bath", myRepo.findByAddress("Bath").getAddress());
+	}
+	
+	@Test
+	public void retrieveByAgeTest()
+	{
+		MySpringBootDataModel model1 = new MySpringBootDataModel("Cooper", "Glasgow", 46);
+		entityManager.persist(model1);
+		entityManager.flush();
+		Integer A = 46;
+		assertEquals(A , myRepo.findByAge(46).getAge());
+	}
 }

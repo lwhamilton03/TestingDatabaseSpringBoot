@@ -6,7 +6,12 @@ import org.springframework.stereotype.Repository;
 import com.qa.mySpringBootDatabaseApp.model.MySpringBootDataModel;
 
 @Repository
-public interface MySpringBootRepository extends JpaRepository<MySpringBootDataModel,Long> {
+public interface MySpringBootRepository extends JpaRepository<MySpringBootDataModel,Long> 
+{
 
+	public MySpringBootDataModel findByName(String name);
 	
+	public MySpringBootDataModel findByAddress(String address); 
+	
+	public MySpringBootDataModel findByAge(Integer age);
 }
