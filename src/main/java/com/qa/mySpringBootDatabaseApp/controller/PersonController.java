@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,15 @@ public class PersonController
 	
 	@Autowired
 	private MySpringBootRepository mySpringBootRepository; 
+	
+	@PostMapping("/person/{personId}/orders")
+	public Order createComment(@PathVariable (value = "personId") Long personId, @Valid @RequestBody Order order)
+	{
+		return mySpringBootRepository.findById(personId)
+				.map(mySpringBootDataModel -> {order.setPerson(mySpringBootDataModel);
+		return orderRepository.save(order);})
+				.orElseThrow(() -> new ResourceNotFoundException("Person", "id", order));
+	}
 	
 	@GetMapping("/person/{personId}/orders")
 	public Page<Order> getAllOrdersByPersonId(@PathVariable(value = "person_id") Long personId, Pageable pageable)
